@@ -10,6 +10,38 @@ export class App {
         for (const method of App.methods) {
             this.#routes[method] = [];
         }
+
+        listenAndServe(options, async (req) => {
+            const params: Record<string, string> = {};
+            const branch = this.#routes[req.method] ?? [];
+            const url = req.url.substring(req.url.indexOf("/", 14));
+
+            const len = branch.length;
+
+            for (let o = 0; o < len; o += 3) {
+                const handler = branch[o] as Handler;
+                const keys = branch[o + 1] as string[];
+                const pattern = branch[o + 2] as RegExp;
+
+                if (keys.length === 0) {
+                    const res = pattern.exec(url);
+                    if (res === null) continue;
+
+                    const groups = res.groups;
+                    if (groups !== undefined) for (const key in groups) params[key] = groups[key];
+                } else if (0 < keys.length) {
+                    const res = pattern.exec(url);
+                    if (res === null) continue;
+
+                    const entries = keys.length;
+                    for (let oo = 0; oo < entries; oo++) params[keys[oo]] = res[1 + oo];
+                } else if (false === pattern.test(url)) continue;
+
+                return await handler(req, params);
+            }
+
+            return new Response(undefined, { status: 404, statusText: "Not found" });
+        });
     }
 
     static readonly methods = ["GET", "PUT", "POST", "HEAD", "PATCH", "TRACE", "DELETE", "OPTIONS", "CONNECT"] as const;
