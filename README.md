@@ -4,13 +4,13 @@
 <img alt="Github license badge" src="https://img.shields.io/github/license/Amatsagu/Promethium" />
 <img alt="Maintenance badge" src="https://img.shields.io/maintenance/yes/2022" />
 
-> Zero dependency, tiny web server with routing included.
+> Zero dependency, tiny web framework with routing included.
 
 ### Example usage
 <img alt="Example app usage" src="https://raw.githubusercontent.com/Amatsagu/Promethium/master/.github/example.png" />
 
 ### Quick performance check
-| Native Web Server                                                                       | Promethium Web Server                                                                       |
+| Native Web Server                                                                       | Promethium Web Framework                                                                    |
 |-----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
 | https://raw.githubusercontent.com/Amatsagu/Promethium/master/.github/native_benchmark.png | https://raw.githubusercontent.com/Amatsagu/Promethium/master/.github/Promethium_benchmark.png |
 | Avg. 40.97K req/sec                                                                     | Avg. 40.56K req/sec                                                                       |
