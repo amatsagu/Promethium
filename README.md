@@ -1,7 +1,7 @@
-# Inspirus
+# Promethium
 
-<a href="https://deepscan.io/dashboard#view=project&tid=15317&pid=19307&bid=496963"><img src="https://deepscan.io/api/teams/15317/projects/19307/branches/496963/badge/grade.svg" alt="DeepScan grade"></a>
-<img alt="Github license badge" src="https://img.shields.io/github/license/Amatsagu/Inspirus" />
+<a href="https://deepscan.io/dashboard#view=project&tid=15317&pid=19858&bid=521822"><img src="https://deepscan.io/api/teams/15317/projects/19858/branches/521822/badge/grade.svg" alt="DeepScan grade"></a>
+<img alt="Github license badge" src="https://img.shields.io/github/license/Amatsagu/Promethium" />
 <img alt="Maintenance badge" src="https://img.shields.io/maintenance/yes/2022" />
 
 > Zero dependency, tiny web server with routing included.
