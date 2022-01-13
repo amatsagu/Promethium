@@ -3,7 +3,7 @@ import { listenAndServe } from "./listener.ts";
 
 export type RouteResponse = Response | void | Promise<Response | void>;
 export type Handler = (request: Request, params: Record<string, string>) => RouteResponse;
-export type AppOptions = Deno.ListenOptions | Deno.ListenTlsOptions;
+export type AppOptions = Omit<Deno.ListenOptions | Deno.ListenTlsOptions, "transport">;
 
 export class App {
     constructor(options: AppOptions) {
