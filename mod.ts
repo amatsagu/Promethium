@@ -1,2 +1,2 @@
-export { App, type Handler } from "./src/app.ts";
-export { type Pattern } from "./src/parser.ts";
+export { App } from "./src/app.ts";
+export type { RouteResponse, Handler, AppOptions, Pattern } from "./src/types.d.ts";

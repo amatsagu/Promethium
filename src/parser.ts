@@ -1,9 +1,4 @@
-export type Pattern = RegExp | string;
-
-interface ParseResult {
-    keys: string[];
-    pattern: RegExp;
-}
+import { Pattern, ParseResult } from "./types.d.ts";
 
 export function parse(route: Pattern, loose?: boolean): ParseResult {
     if (route instanceof RegExp) return { keys: [], pattern: route };

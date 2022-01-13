@@ -1,9 +1,6 @@
-import { parse, Pattern } from "./parser.ts";
+import { parse } from "./parser.ts";
 import { listenAndServe } from "./listener.ts";
-
-export type RouteResponse = Response | void | Promise<Response | void>;
-export type Handler = (request: Request, params: Record<string, string>) => RouteResponse;
-export type AppOptions = Omit<Deno.ListenOptions | Deno.ListenTlsOptions, "transport">;
+import { AppOptions, Handler, Pattern } from "./types.d.ts";
 
 export class App {
     constructor(options: AppOptions) {

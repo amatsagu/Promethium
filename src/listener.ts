@@ -1,4 +1,4 @@
-import { AppOptions, RouteResponse } from "./app.ts";
+import { AppOptions, RouteResponse } from "./types.d.ts";
 
 // @ts-ignore Unstable :/
 const interrupt = Deno.core.Interrupted;
@@ -22,11 +22,13 @@ export async function listenAndServe(options: AppOptions, callback: (request: Re
             try {
                 const event = await http.nextRequest();
                 if (event === null) break;
-                
+
                 const data = await callback(event.request);
-                if (data !== undefined) event.respondWith(data);
-            }
-            catch {
+                if (data !== undefined) {
+                    data.headers.set("Server", "Promethium");
+                    event.respondWith(data);
+                }
+            } catch {
                 // Do nothing.
             }
         }

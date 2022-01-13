@@ -6,18 +6,30 @@
 
 > Zero dependency, tiny web framework with routing included.
 
-### Example usage
-<img alt="Example app usage" src="https://raw.githubusercontent.com/Amatsagu/Promethium/master/.github/example.png" />
+## Why would you use it?
+- 💪 Built on native, Deno's TCP server *(v. high performance)*.
+    * ⮤ Up to 9x times faster than Oak framework!
+- 🗺️ Supports both static & dynamic routing.
+- ♻️ Uses default [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) & [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) structs which are part of fetch API *(no extra abstraction)*.
+- 📦 Comes with optional support for quick rendering of `json` & `jsx`. Those modules won't be loaded by default - you have to import `helpers.ts` file to use them.
 
 ### Quick performance check
-| Native Web Server                                                                       | Promethium Web Framework                                                                    |
+<details>
+  <summary>Click to see quick benchmark results!</summary>
+  
+  | Native Web Server                                                                       | Promethium Web Framework                                                                    |
 |-----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
 | https://raw.githubusercontent.com/Amatsagu/Promethium/master/.github/native_benchmark.png | https://raw.githubusercontent.com/Amatsagu/Promethium/master/.github/Promethium_benchmark.png |
 | Avg. 40.97K req/sec                                                                     | Avg. 40.56K req/sec                                                                       |
 
 The code comes from https://github.com/denoland/deno_std/blob/main/http/bench.ts. Promethium version had the same code attached to "/" route.
+</details>
+<br />
 
-### Contributing
+## Example usage
+<img alt="Example app usage" src="https://raw.githubusercontent.com/Amatsagu/Promethium/master/.github/example.png" />
+
+## Contributing
 1. Fork it!
 2. Modify project to your like.
 3. Test it! `deno test --allow-net --allow-read --unstable`
