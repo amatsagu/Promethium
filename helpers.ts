@@ -1,14 +1,16 @@
 import { ResponseHelperOptions } from "./src/types.d.ts";
-// import { render } from "https://x.lcas.dev/preact@10.5.12/ssr.js"; // JSX Support
-// import type { VNode } from "https://x.lcas.dev/preact@10.5.12/mod.d.ts";
+import { parseBigInts } from "./src/parser.ts";
 
 export function $json(data: Record<string, unknown>, options?: ResponseHelperOptions) {
-    return new Response(JSON.stringify(data, (key, value) => typeof value === "bigint" ? value > Number.MAX_SAFE_INTEGER ? `${value}n` : parseInt(value, 10) : value), {
+    return new Response(JSON.stringify(data, parseBigInts, {
         headers: (options?.headers !== undefined ? Object.assign(options!.headers, { "Content-Type": "application/json; charset=utf-8" }) : { "Content-Type": "application/json; charset=utf-8" }) as HeadersInit,
         status: options?.statusCode ?? 200,
         statusText: options?.statusText ?? "OK"
     });
 }
+
+// import { render } from "https://x.lcas.dev/preact@10.5.12/ssr.js"; // JSX Support
+// import type { VNode } from "https://x.lcas.dev/preact@10.5.12/mod.d.ts";
 
 /** We're using **"PREACT"** *(https://preactjs.com/)* to render your jsx code as an alternative to much slower original. */
 // export function $jsx(data: VNode, options?: ResponseHelperOptions) {
