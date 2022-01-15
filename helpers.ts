@@ -2,7 +2,7 @@ import { ResponseHelperOptions } from "./src/types.d.ts";
 import { parseBigInts } from "./src/parser.ts";
 
 export function $json(data: Record<string, unknown>, options?: ResponseHelperOptions) {
-    return new Response(JSON.stringify(data, parseBigInts, {
+    return new Response(JSON.stringify(data, parseBigInts), {
         headers: (options?.headers !== undefined ? Object.assign(options!.headers, { "Content-Type": "application/json; charset=utf-8" }) : { "Content-Type": "application/json; charset=utf-8" }) as HeadersInit,
         status: options?.statusCode ?? 200,
         statusText: options?.statusText ?? "OK"
