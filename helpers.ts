@@ -3,7 +3,7 @@ import { ResponseHelperOptions } from "./src/types.d.ts";
 // import type { VNode } from "https://x.lcas.dev/preact@10.5.12/mod.d.ts";
 
 export function $json(data: Record<string, unknown>, options?: ResponseHelperOptions) {
-    return new Response(JSON.stringify(data, (key, value) => typeof value === "bigint" ? value > Number.MAX_SAFE_INTEGER ? `${value}n` : value : value), {
+    return new Response(JSON.stringify(data, (key, value) => typeof value === "bigint" ? value > Number.MAX_SAFE_INTEGER ? `${value}n` : parseInt(value, 10) : value), {
         headers: (options?.headers !== undefined ? Object.assign(options!.headers, { "Content-Type": "application/json; charset=utf-8" }) : { "Content-Type": "application/json; charset=utf-8" }) as HeadersInit,
         status: options?.statusCode ?? 200,
         statusText: options?.statusText ?? "OK"
