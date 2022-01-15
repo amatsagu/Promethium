@@ -38,12 +38,3 @@ export function parse(route: Pattern, loose?: boolean): ParseResult {
         pattern: new RegExp("^" + pattern + (loose ? "(?=$|/)" : "/?$"), "i")
     };
 }
-
-export function parseBigInts(key: string, value: unknown) {
-  if (typeof value === "bigint") {
-    if (value > 9007199254740991) return value.toString();
-    // @ts-ignore BigInt has support for that!
-    return parseInt(value);
-  }
-  return value
-}
