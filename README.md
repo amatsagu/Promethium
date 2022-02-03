@@ -11,7 +11,7 @@
     * ⮤ Up to 9x times faster than Oak framework!
 - 🗺️ Supports both static & dynamic routing *(string or regex)*.
 - ♻️ Uses default [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) & [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) structs which are part of fetch API *(no extra abstraction)*.
-- 📦 Comes with optional support for quick rendering of `json` & `jsx`. Those modules won't be loaded by default - you have to import `helpers.ts` file to use them.
+- 📦 Comes with optional support for quick rendering of any static files, raw text, json & html documents. Those modules won't be loaded by default - you have to import `helpers.ts` file in order to access them.
 
 ### Quick performance check
 <details>
