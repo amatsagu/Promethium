@@ -1,6 +1,6 @@
 import { ResponseHelperOptions, JSONLike } from "./src/types.d.ts";
 
-export function $json(data: Record<string, unknown>, options?: ResponseHelperOptions) {
+export function $json(data: JSONLike, options?: ResponseHelperOptions) {
     return new Response(
         JSON.stringify(data, (_, value) => (typeof value === "bigint" ? value.toString() : value)),
         {
