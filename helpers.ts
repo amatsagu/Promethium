@@ -1,23 +1,35 @@
 import { ResponseHelperOptions, JSONLike } from "./src/types.d.ts";
 
-export function $json(data: JSONLike, options?: ResponseHelperOptions) {
-    return new Response(JSON.stringify(data, (key, value) => typeof value === "bigint" ? value.toString() : value), {
-        headers: (options?.headers !== undefined ? Object.assign(options!.headers, { "Content-Type": "application/json; charset=utf-8" }) : { "Content-Type": "application/json; charset=utf-8" }) as HeadersInit,
-        status: options?.statusCode ?? 200,
-        statusText: options?.statusText ?? "OK"
+export function $json(data: Record<string, unknown>, options?: ResponseHelperOptions) {
+    return new Response(
+        JSON.stringify(data, (_, value) => (typeof value === "bigint" ? value.toString() : value)),
+        {
+            headers: (options?.headers !== undefined ? Object.assign(options!.headers, { "Content-Type": "application/json; charset=utf-8" }) : { "Content-Type": "application/json; charset=utf-8" }) as HeadersInit,
+            status: options?.statusCode ?? 200
+        }
+    );
+}
+
+export function $text(data: any, options?: ResponseHelperOptions) {
+    return new Response(String(data), {
+        headers: (options?.headers !== undefined ? Object.assign(options!.headers, { "Content-Type": "text/plain; charset=utf-8" }) : { "Content-Type": "text/plain; charset=utf-8" }) as HeadersInit,
+        status: options?.statusCode ?? 200
     });
 }
 
-// import { render } from "https://x.lcas.dev/preact@10.5.12/ssr.js"; // JSX Support
-// import type { VNode } from "https://x.lcas.dev/preact@10.5.12/mod.d.ts";
+export function $html(filePath: string, options?: ResponseHelperOptions) {
+    if (filePath.endsWith(".html") === false) throw new Error("Invalid file type!");
 
-/** We're using **"PREACT"** *(https://preactjs.com/)* to render your jsx code as an alternative to much slower original. */
-// export function $jsx(data: VNode, options?: ResponseHelperOptions) {
-//     return new Response(render(data), {
-//         headers: (options?.headers !== undefined ? Object.assign(options!.headers, { "Content-Type": "text/html; charset=utf-8" }) : { "Content-Type": "text/html; charset=utf-8" }) as HeadersInit,
-//         status: options?.statusCode ?? 200,
-//         statusText: options?.statusText ?? "OK"
-//     });
-// }
+    return new Response(Deno.readTextFileSync(filePath), {
+        headers: (options?.headers !== undefined ? Object.assign(options!.headers, { "Content-Type": "text/html; charset=utf-8" }) : { "Content-Type": "text/html; charset=utf-8" }) as HeadersInit,
+        status: options?.statusCode ?? 200
+    });
+}
 
-// DISABLED JSX SUPPORT FOR NOW CAUSE LATEST RELEASE OF DENO DOESN'T WANT TO WORK WITH IT!
+export function $file(filePath: string) {
+    try {
+        return new Response(Deno.readFileSync(filePath));
+    } catch {
+        return new Response("404 Not Found", { status: 404 });
+    }
+}
